@@ -30,7 +30,7 @@ app.get('/', (req, res) => {
 })
 
 app.listen(PORT, async () => {
-    console.log(`Subscrtiption Tracker API is running on http://localhost:${PORT}`);
+    console.log(`Subscription Tracker API is running on http://localhost:${PORT}`);
     await connectToDatabase()
 })
 
