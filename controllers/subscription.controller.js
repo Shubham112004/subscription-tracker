@@ -51,3 +51,59 @@ export const getUserSubscriptions = async (req, res, next) => {
         next(error)
     }
 }
+
+export const getSubscriptions = async (req, res, next) => {
+    try {
+        const subscriptions = await Subscriptions.find()
+        res.status(200).json({
+            success: true,
+            data: subscriptions
+        })
+    } catch (error) {
+        next(error)
+    }
+}
+
+export const getSubscription = async (req, res, next) => {
+    try {
+        const subscription = await Subscriptions.findById(req.params.id)
+
+        if (!subscription) {
+            const error = new Error('Subscription not found')
+            error.statusCode = 404;
+            throw error
+        }
+
+        res.status(200).json({
+            success: true,
+            data: subscription
+        })
+    } catch (error) {
+        next(error)
+    }
+}
+
+export const updateSubscription = async (req, res, next) => {
+    try {
+        const newSubscription = await Subscriptions.findByIdAndUpdate(
+            req.params.id,
+            req.body,
+            { new: true, runValidators: true }
+        )
+
+        if (!newSubscription) {
+            const error = new Error('Subscription not found')
+            error.statusCode = 404
+            throw error
+        }
+
+        res.status(200).json({
+            success: true,
+            data: newSubscription
+        })
+
+    } catch (error) {
+        next(error)
+    }
+}
+
