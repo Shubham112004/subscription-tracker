@@ -10,6 +10,7 @@ import workflowRouter from './routes/workflow.routes.js';
 import connectToDatabase from './database/mongodb.js';
 import errorMiddleware from './middlewares/error.middleware.js';
 import arcjetMiddleware from './middlewares/arcjet.middleware.js';
+import { dashboard } from './utils/dashboard.js';
 
 const app = express();
 
@@ -26,7 +27,7 @@ app.use('/api/v1/workflows', workflowRouter)
 app.use(errorMiddleware)
 
 app.get('/', (req, res) => {
-    res.send('Welcome to the Subscription Tracker API!')
+    res.send(dashboard)
 })
 
 app.listen(PORT, async () => {
